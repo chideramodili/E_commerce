@@ -7,7 +7,9 @@ exports.create_a_new_buyer = async (req, res, nex) => {
   const { error, validation } = joiValidation.validate(req.body);
   if (error) {
     console.log(error);
-    return res.status(422).send("Invalid input");
+    return res
+      .status(422)
+      .send("incomplete credentials or invalid credentials");
   }
 
   const buyer = new Buyer(
@@ -59,3 +61,29 @@ exports.get_all_buyers = async (req, res, next) => {
 };
 
 //TO GET A SINGLE BUYER
+exports.get_a_single_buyer = async (req, res, next) => {
+  const buyer = await Buyer.findById(req.params.buyerId);
+  res.send(buyer);
+};
+
+//TO DELETE AN ACCOUNT OR A BUYER
+exports.delete_buyer = async (req, res, next) => {
+  const { error, validation } = joiValidation.validate(
+    joiValidation.email,
+    joiValidation.password
+  );
+  if (error) {
+    console.log(error);
+    return res.status(422).send("Invalid input");
+  }
+  const account = {
+    email: req.body.email,
+    password: req.body.password
+  };
+  const verify_account = await Buyer.findOne(account);
+  if (!verify_account) {
+    return res.status(400).send("not an account");
+  }
+  const acc_to_delete = await Buyer.findOneAndDelete(account);
+  res.json(acc_to_delete);
+};
