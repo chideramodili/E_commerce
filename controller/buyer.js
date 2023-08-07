@@ -65,24 +65,21 @@ exports.get_a_single_buyer = async (req, res, next) => {
 
 //TO DELETE AN ACCOUNT OR A BUYER
 exports.delete_buyer = async (req, res, next) => {
-  const { error, validation } = joiValidation.validate(
-    joiValidation.email,
-    joiValidation.password
-  );
-  if (error) {
-    console.log(error);
-    return res.status(422).send("Invalid input");
-  }
   const account = {
     email: req.body.email,
     password: req.body.password
   };
-  const verify_account = await Buyer.findOne(account);
+  const verify_account = await Buyer.findOne({ email: req.body.email });
   if (!verify_account) {
-    return res.status(400).send("not an account");
+    return res.status(400).send("sorry the email does not match");
   }
-  const acc_to_delete = await Buyer.findOneAndDelete(account);
-  res.json(acc_to_delete);
+  const verify_password = await Buyer.findOne(account);
+  if (!verify_password) {
+    return res.send("incorrect password");
+  } else {
+    const acc_to_delete = await Buyer.findOneAndDelete(account);
+    res.json(acc_to_delete);
+  }
 };
 
 //TO EDIT A  BUYER ACCOUNT
