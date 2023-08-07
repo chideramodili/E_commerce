@@ -1,4 +1,3 @@
-const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const buyer = mongoose.Schema({
@@ -15,6 +14,14 @@ const buyer = mongoose.Schema({
     require: true
   },
   email: {
+    type: String,
+    require: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  address: {
     type: String,
     require: true
   },

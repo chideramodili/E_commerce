@@ -13,5 +13,6 @@ router.post("/login", buyer_controller.login);
 router.get("/:buyerId", buyer_controller.get_a_single_buyer);
 //TO DELETE A BUY ER OR AN ACCOUNT
 router.delete("/", buyer_controller.delete_buyer);
-
+//TO UPDATE A BUYER
+router.patch("/", buyer_controller.edit_buyer);
 module.exports = router;
