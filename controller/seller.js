@@ -53,8 +53,12 @@ exports.seller_login = async (req, res, next) => {
     return res.send("incorrect password");
   }
   // TO CREATE AND ASSIGN TOKEN
-  const token = jwt.sign({ _id: Seller._id }, process.env.JWT_TOKEN);
-  res.send("logged in successfull👍");
+  const token = jwt.sign(
+    { _id: Seller._id },
+    "ygsuVUagadvjwkfgvdbcyvwejkedfxngvbqhNAGShbsnvbbxvANSCBZxrequirerandomBytestoStringkjsgVzdxaj"
+  );
+  res.header("TOKEN", token).send(token);
+  //   res.send("logged in successfull👍");
 };
 
 //TO GET ALL SELLERS
