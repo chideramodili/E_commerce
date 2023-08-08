@@ -29,6 +29,10 @@ const seller = mongoose.Schema({
     type: String,
     required: true
   },
+  phone: {
+    type: String
+    // required: true
+  },
   date: {
     type: Date,
 

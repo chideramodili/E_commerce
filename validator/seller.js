@@ -26,9 +26,8 @@ const seller = Joi.object().keys({
   shopName: Joi.string()
     .min(2)
     .required(),
-  phone: Joi.number()
-    .min(4)
-    .required()
+  phone: Joi.number().min(4)
+  // .required()
 });
 
 module.exports = seller;

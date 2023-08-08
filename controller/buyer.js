@@ -89,9 +89,13 @@ exports.edit_buyer = async (req, res, nsxt) => {
     email: req.body.email,
     password: req.body.password
   };
-  const verify_account = await Buyer.findOne(account);
+  const verify_account = await Buyer.findOne({ email: req.body.email });
   if (!verify_account) {
-    return res.status(400).send("not an account");
+    return res.status(400).send("wrong email");
+  }
+  const verify_password = await Buyer.findOne(account);
+  if (!verify_password) {
+    return res.send("wrong password");
   }
   const update = await Buyer.findOneAndUpdate({
     $set: {
