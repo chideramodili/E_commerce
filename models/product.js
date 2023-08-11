@@ -5,7 +5,7 @@ const product = mongoose.Schema({
     type: String,
     required: true
   },
-  shopName: {
+  amount: {
     type: String,
     required: true
   },
@@ -14,3 +14,5 @@ const product = mongoose.Schema({
     defualt: Date.now
   }
 });
+
+module.exports = mongoose.model("product", product);

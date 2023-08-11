@@ -54,12 +54,18 @@ exports.seller_login = async (req, res, next) => {
   }
   // TO CREATE AND ASSIGN TOKEN
   const token = jwt.sign(
-    { _id: Seller._id },
-    "ygsuVUagadvjwkfgvdbcyvwejkedfxngvbqhNAGShbsnvbbxvANSCBZxrequirerandomBytestoStringkjsgVzdxaj"
+    { email: Seller.email },
+    "gfbvuyahjkdfbubhjanmdbsfsvdbhjansbdwjadgqtyuhfgbyuhegbfu"
   );
-  res.header("TOKEN", token).send(token);
+  res.header("SELLER_TOKEN", token).send(token);
   //   res.send("logged in successfull👍");
 };
+
+// ASSIGNNING JWT
+
+// exports.jwt = async (req, res, next) => {
+//   return res.send(Seller.findOne());
+// };
 
 //TO GET ALL SELLERS
 exports.get_all_sellers = async (req, res, next) => {

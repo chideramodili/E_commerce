@@ -1,6 +1,7 @@
 const Buyer = require("../models/buyer");
 const joiValidation = require("../validator/buyer");
 const _ = require("lodash");
+const jwt = require("jsonwebtoken");
 //TO CREATE A NEW BUYER
 
 exports.create_a_new_buyer = async (req, res, nex) => {
@@ -48,7 +49,12 @@ exports.login = async (req, res) => {
   if (!verification) {
     return res.send("login unsuccessful ");
   }
-  res.send("logged in👍");
+  const token = jwt.sign(
+    { _id: Buyer._id },
+    "ygsuVUagadvjwkfgvdbcyvwejkedfxngvbqhNAGShbsnvbbxvANSCBZxrequirerandomBytestoStringkjsgVzdxaj"
+  );
+  res.header("BUYER_TOKEN", token).send(token);
+  // res.send("logged in👍");
 };
 
 //TO GET ALL BUYERS
