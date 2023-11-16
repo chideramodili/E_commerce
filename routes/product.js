@@ -9,10 +9,10 @@ router.use(express.json());
 router.post("/", product_controller.create_new_product);
 
 //TO GET A PRODUCT
-router.get("/");
+router.get("/", product_controller.get_products);
 
 //TO SERCH FOR A PRODUCT
-router.get("/search");
+router.post("/search", product_controller.search_for_a_product);
 
 // TO EDIT A PRDUCT
 router.patch("/");
